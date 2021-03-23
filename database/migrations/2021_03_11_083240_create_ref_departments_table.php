@@ -17,7 +17,7 @@ class CreateRefDepartmentsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->foreignId('faculty_id')->constrained('faculty')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('faculty_id')->constrained('ref_faculty')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->engine = 'InnoDB';
