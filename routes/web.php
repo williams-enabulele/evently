@@ -21,7 +21,7 @@ $router->group(['prefix' =>'auth'], function () use ($router){
    $router->post('login', 'AuthController@login');
 });
 // API route group
-$router->group(['prefix' => 'api'], function () use ($router) {
+$router->group(['middleware' => 'auth','prefix' => 'api'], function () use ($router) {
 
    // Matches "/api/profile
    $router->get('profile', 'UserController@profile');
@@ -32,4 +32,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
    // Matches "/api/users
    $router->get('users', 'UserController@allUsers');
+   //Ref Institutions
+   $router->get('institution', 'AllController@getInstitution');
+   $router->get('institution/{id}', 'AllController@getInstitutionOne');
+   $router->post('institution', 'AllController@createInstitution');
 });

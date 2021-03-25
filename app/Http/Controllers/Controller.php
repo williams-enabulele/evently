@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Auth;
-
 class Controller extends BaseController
 {
     //Add this method to the Controller class

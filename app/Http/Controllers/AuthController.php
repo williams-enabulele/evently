@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use  App\User;
 use Illuminate\Support\Facades\Auth;
-//use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -61,6 +61,8 @@ class AuthController extends Controller
         ]);
 
         $credentials = $request->only(['username', 'password']);
+        //$user = User::where('username', '=', $credentials['username'])->first();
+        //$customClaims = ['role' => $user->uniqno];
 
         if (! $token = Auth::attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
