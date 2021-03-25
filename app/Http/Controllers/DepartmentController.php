@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-class AllController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -20,22 +20,22 @@ class AllController extends Controller
 
     //
 
-    public function getInstitution()
+    public function getDepartment()
     {
       
-            $institute = DB::table('ref_institution')->paginate(15);
-            if($institute){
-                return response()->json(["results" => $institute],200);
+            $depts = DB::table('ref_department')->paginate(15);
+            if($depts){
+                return response()->json(["results" => $depts],200);
             }
             else {
-                return response()->json($institute,401);
+                return response()->json($depts,401);
             } 
                  
     }
     
-    public function getInstitutionOne($id){
+    public function getDepartmentOne($id){
         $results = DB::select (
-            'select * from ref_institution
+            'select * from ref_Department
             where id =:id',
             ['id' => $id]
         );
@@ -44,32 +44,29 @@ class AllController extends Controller
     }
 
 
-    public function createInstitution(Request $request){
+    public function createDepartment(Request $request){
 
         $this->validate($request, [
-             'name' => 'required',
-             'founded'=>'required'
+             'name' => 'required'
          ]);
          
          $name= $request->input('name');
-         $founded = $request->input('founded');
-         $location = $request->input('location');
-         $about = $request->input('about');
+         $description = $request->input('description');
+         $faculty_id = $request->input('faculty_id');
+         
  
          $results = DB::insert(
-             'insert into ref_institution 
+             'insert into ref_Department 
              (
                  name,
-                 founded,
-                 location,
-                 about
+                 description,
+                 faculty_id
              ) 
-             values (?,?,?,?)', 
+             values (?,?,?)', 
              [
                  $name,
-                 $founded,
-                 $location,
-                 $about
+                 $description,
+                 $faculty_id
              ] );
          if($results == 'true'){
              return response()->json($results,201);

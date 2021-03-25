@@ -33,7 +33,20 @@ $router->group(['middleware' => 'auth','prefix' => 'api'], function () use ($rou
    // Matches "/api/users
    $router->get('users', 'UserController@allUsers');
    //Ref Institutions
-   $router->get('institution', 'AllController@getInstitution');
-   $router->get('institution/{id}', 'AllController@getInstitutionOne');
-   $router->post('institution', 'AllController@createInstitution');
+   $router->get('institution', 'InstitutionController@getInstitution');
+   $router->get('institution/{id}', 'InstitutionController@getInstitutionOne');
+   $router->post('institution', 'InstitutionController@createInstitution');
+
+   // Ref Faculty
+   $router->get('faculty', 'FacultyController@getFaculty');
+   $router->get('faculty/{id}', 'FacultyController@getFacultyOne');
+   $router->post('faculty', 'FacultyController@createFaculty');
+
+    // Ref Department
+    $router->get('department', 'DepartmentController@getDepartment');
+    $router->get('department/{id}', 'DepartmentController@getDepartmentOne');
+    $router->post('department', 'DepartmentController@createDepartment');
+
+    
+
 });
