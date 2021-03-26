@@ -47,6 +47,9 @@ $router->group(['middleware' => 'auth','prefix' => 'api'], function () use ($rou
     $router->get('department/{id}', 'DepartmentController@getDepartmentOne');
     $router->post('department', 'DepartmentController@createDepartment');
 
-    
+     // Ref Levels
+     $router->get('levels', 'LevelsController@getLevels');
+     $router->get('levels/{id}', 'LevelsController@getLevelsOne');
+     $router->post('levels', 'LevelsController@createLevels');
 
 });

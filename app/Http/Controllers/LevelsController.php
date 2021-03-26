@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-class DepartmentController extends Controller
+class LevelsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -20,22 +20,22 @@ class DepartmentController extends Controller
 
     //
 
-    public function getDepartment()
+    public function getLevels()
     {
       
-            $depts = DB::table('ref_departments')->paginate(15);
-            if($depts){
-                return response()->json(["results" => $depts],200);
+            $institute = DB::table('ref_levels')->paginate(15);
+            if($institute){
+                return response()->json(["results" => $institute],200);
             }
             else {
-                return response()->json($depts,401);
+                return response()->json($institute,401);
             } 
                  
     }
     
-    public function getDepartmentOne($id){
+    public function getLevelsOne($id){
         $results = DB::select (
-            'select * from ref_departments
+            'select * from ref_levels
             where id =:id',
             ['id' => $id]
         );
@@ -44,30 +44,29 @@ class DepartmentController extends Controller
     }
 
 
-    public function createDepartment(Request $request){
+    public function createLevels(Request $request){
 
         $this->validate($request, [
-             'name' => 'required'
+             'level' => 'required'
          ]);
          
-         $name= $request->input('name');
+         $level= $request->input('level');
          $description = $request->input('description');
-         $faculty_id = $request->input('faculty_id');
+         $department_id = $request->input('department_id');
          
  
          $results = DB::insert(
-             'insert into ref_departments 
+             'insert into ref_levels
              (
-                 name,
+                 level,
                  description,
-                 faculty_id
-
+                 department_id
              ) 
              values (?,?,?)', 
              [
-                 $name,
+                 $level,
                  $description,
-                 $faculty_id
+                 $department_id
              ] );
          if($results == 'true'){
              return response()->json($results,201);
